@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMBA GAME</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2, h3, h4 {
+            margin-bottom: 15px;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        /* Окно создания персонажа */
+        #character-creation {
+            width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #hero-name-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .character-class {
+            background-color: #4CAF50;
+            color: white;
+            margin: 5px;
+            padding: 10px 15px;
+        }
+
+        #create-hero {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .character-class:hover, #create-hero:hover {
+            background-color: #45a049;
+        }
+
+        /* Основное окно игры */
+        #game-area {
+            display: none;
+            padding: 20px;
+        }
+
+        /* Верхняя панель ресурсов */
+        #resources {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #resources div {
+            margin: 0 15px;
+        }
+
+        .resource-icon {
+            width: 24px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        /* Панель навигации */
+        #navigation {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #navigation button {
+            background-color: #007BFF;
+            color: white;
+            margin: 0 10px;
+            padding: 10px 30px;
+        }
+
+        #navigation button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Окна игры */
+        .game-window {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* В деревне */
+        #building-upgrades {
+            display: flex;
+            justify-content: center;
+        }
+
+        #building-upgrades div {
+            margin: 0 20px;
+            text-align: left;
+        }
+
+        #upgrade-farm {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        #upgrade-farm:hover {
+            background-color: #e67e22;
+        }
+
+        /* Окно охоты */
+        #hunting button {
+            background-color: #27ae60;
+            color: white;
+            margin: 10px 0;
+            width: 200px;
+        }
+
+        #hunting button:hover {
+            background-color: #2ecc71;
+        }
+
+        /* Окно персонажа с картинкой */
+        #character-info {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        #character-image {
+            margin-right: 30px;
+        }
+
+        #character-image img {
+            width: 250px;
+            height: auto;
+        }
+
+        #character-details {
+            text-align: left;
+        }
+
+        /* Лог действий */
+        #log {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #log-content {
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 5px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Окно создания персонажа -->
+    <div id="character-creation">
+        <h2>Создание героя</h2>
+        <input type="text" id="hero-name-input" placeholder="Введите имя героя">
+        <div>
+            <button class="character-class" data-class="warrior">Воин</button>
+            <button class="character-class" data-class="archer">Лучник</button>
+            <button class="character-class" data-class="wizard">Волшебник</button>
+        </div>
+        <button id="create-hero">Создать героя</button>
+    </div>
+
+    <!-- Основное окно игры -->
+    <div id="game-area">
+        <!-- Верхняя панель ресурсов -->
+        <div id="resources">
+            <div><img src="wood.png" alt="Дерево" class="resource-icon"> Дерево: <span id="wood">0</span></div>
+            <div><img src="stone.png" alt="Камень" class="resource-icon"> Камень: <span id="stone">0</span></div>
+            <div><img src="gold.png" alt="Золото" class="resource-icon"> Золото: <span id="gold">0</span></div>
+        </div>
+
+        <!-- Панель навигации -->
+        <div id="navigation">
+            <button id="village-button">В деревню</button>
+            <button id="hunting-button">На охоту</button>
+            <button id="character-button">Персонаж</button>
+        </div>
+
+        <!-- Окно деревни -->
+        <div id="village" class="game-window">
+            <h2>В деревню</h2>
+            <div id="building-upgrades">
+                <div>
+                    <h4>Ферма (Уровень: <span id="farm-level">1</span>)</h4>
+                    <button id="upgrade-farm">Улучшить ферму (100 дерева)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Окно охоты -->
+        <div id="hunting" class="game-window">
+            <h2>На охоту</h2>
+            <button id="start-easy-hunting">Легкая зона</button>
+            <button id="start-medium-hunting">Средняя зона (требуется 5 уровень)</button>
+            <button id="start-hard-hunting">Сложная зона (требуется 10 уровень)</button>
+        </div>
+
+        <!-- Окно персонажа с картинкой во весь рост -->
+        <div id="character-info" class="game-window">
+            <div id="character-image">
+                <img src="warrior.png" alt="Изображение героя" id="hero-img">
+            </div>
+            <div id="character-details">
+                <h2>Персонаж</h2>
+                <h3>Герой: <span id="hero-name"></span> (Класс: <span id="hero-class"></span>)</h3>
+                <h4>Уровень: <span id="level">1</span></h4>
+                <h4>Опыт: <span id="experience">0</span></h4>
+                <h4>Сила: <span id="strength">10</span></h4>
+                <h4>Ловкость: <span id="agility">10</span></h4>
+                <h4>Интеллект: <span id="intelligence">10</span></h4>
+            </div>
+        </div>
+
+        <!-- Лог действий -->
+        <div id="log">
+            <h4>Лог действий:</h4>
+            <div id="log-content"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
