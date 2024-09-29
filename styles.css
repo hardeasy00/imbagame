@@ -1,63 +1,84 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+/* Основные стили для окна создания персонажа */
+#character-creation {
+    background-color: #f2f2f2;
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 400px;
+    padding: 20px;
+    margin: 50px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Стили для заголовков и текстов */
+#character-creation h2 {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#character-creation label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Стили для ввода текста */
+#hero-name-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* Стили для кнопок */
+.character-class {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.character-class.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.character-class:hover {
+    background-color: #ddd;
+    transform: scale(1.05);
+}
+
+/* Кнопка создания персонажа */
+#create-hero {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+#create-hero:hover {
+    background-color: #45a049;
+}
+
+/* Стили для центрирования контента */
+.centered {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
-}
-
-#character-creation, #game-area {
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-#resources {
-    display: flex;
-    justify-content: space-around;
-}
-
-.resource-icon {
-    width: 20px;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-#navigation {
-    margin: 20px 0;
-    text-align: center;
-}
-
-button {
-    margin: 5px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.game-window {
-    display: none;
-}
-
-#log {
-    margin-top: 20px;
-}
-
-#log-content {
-    background-color: #eee;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
