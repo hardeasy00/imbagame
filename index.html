@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMBA GAME</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Окно создания персонажа -->
+    <div id="character-creation">
+        <h2>Создание героя</h2>
+        <input type="text" id="hero-name-input" placeholder="Введите имя героя">
+        <div>
+            <button class="character-class" data-class="warrior">Воин</button>
+            <button class="character-class" data-class="archer">Лучник</button>
+            <button class="character-class" data-class="wizard">Волшебник</button>
+        </div>
+        <button id="create-hero">Создать героя</button>
+    </div>
+
+    <!-- Основное окно игры -->
+    <div id="game-area" style="display:none;">
+        <!-- Верхняя панель ресурсов -->
+        <div id="resources">
+            <h3>Ресурсы:</h3>
+            <div><img src="wood.png" alt="Дерево" class="resource-icon"> Дерево: <span id="wood">0</span></div>
+            <div><img src="stone.png" alt="Камень" class="resource-icon"> Камень: <span id="stone">0</span></div>
+            <div><img src="gold.png" alt="Золото" class="resource-icon"> Золото: <span id="gold">0</span></div>
+        </div>
+
+        <!-- Панель навигации -->
+        <div id="navigation">
+            <button id="village-button">В деревню</button>
+            <button id="hunting-button">На охоту</button>
+            <button id="character-button">Персонаж</button>
+        </div>
+
+        <!-- Окно деревни -->
+        <div id="village" class="game-window" style="display:none;">
+            <h2>В деревню</h2>
+            <div id="building-upgrades">
+                <div>
+                    <h4>Ферма (Уровень: <span id="farm-level">1</span>)</h4>
+                    <button id="upgrade-farm">Улучшить ферму (100 дерева)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Окно охоты -->
+        <div id="hunting" class="game-window" style="display:none;">
+            <h2>На охоту</h2>
+            <button id="start-easy-hunting">Легкая зона</button>
+            <button id="start-medium-hunting">Средняя зона (требуется 5 уровень)</button>
+            <button id="start-hard-hunting">Сложная зона (требуется 10 уровень)</button>
+        </div>
+
+        <!-- Окно персонажа -->
+        <div id="character-info" class="game-window" style="display:none;">
+            <h2>Персонаж</h2>
+            <h3>Герой: <span id="hero-name"></span> (Класс: <span id="hero-class"></span>)</h3>
+            <h4>Уровень: <span id="level">1</span></h4>
+            <h4>Опыт: <span id="experience">0</span></h4>
+            <h4>Сила: <span id="strength">10</span></h4>
+            <h4>Ловкость: <span id="agility">10</span></h4>
+            <h4>Интеллект: <span id="intelligence">10</span></h4>
+        </div>
+
+        <!-- Лог действий -->
+        <div id="log">
+            <h4>Лог действий:</h4>
+            <div id="log-content" style="max-height: 200px; overflow-y: auto;"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
